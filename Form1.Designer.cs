@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.gbMetodos = new System.Windows.Forms.GroupBox();
             this.optSelectionSort = new System.Windows.Forms.RadioButton();
             this.optMergeSort = new System.Windows.Forms.RadioButton();
@@ -159,33 +159,34 @@
             this.cuadro.BackColor = System.Drawing.Color.Transparent;
             this.cuadro.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.cuadro.BorderSkin.BackColor = System.Drawing.Color.Black;
-            chartArea1.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea1.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea1.AxisY.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea1.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea1.BackColor = System.Drawing.Color.Silver;
-            chartArea1.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            chartArea1.Name = "ChartArea1";
-            this.cuadro.ChartAreas.Add(chartArea1);
+            chartArea2.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea2.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea2.AxisY.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea2.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea2.BackColor = System.Drawing.SystemColors.ControlLight;
+            chartArea2.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea2.Name = "ChartArea1";
+            this.cuadro.ChartAreas.Add(chartArea2);
             this.cuadro.IsSoftShadows = false;
-            legend1.ForeColor = System.Drawing.Color.Transparent;
-            legend1.HeaderSeparatorColor = System.Drawing.Color.Transparent;
-            legend1.ItemColumnSeparatorColor = System.Drawing.Color.Transparent;
-            legend1.Name = "Legend1";
-            legend1.TitleForeColor = System.Drawing.Color.Transparent;
-            legend1.TitleSeparatorColor = System.Drawing.Color.Transparent;
-            this.cuadro.Legends.Add(legend1);
+            legend2.Enabled = false;
+            legend2.ForeColor = System.Drawing.Color.Transparent;
+            legend2.HeaderSeparatorColor = System.Drawing.Color.Transparent;
+            legend2.ItemColumnSeparatorColor = System.Drawing.Color.Transparent;
+            legend2.Name = "Legend1";
+            legend2.TitleForeColor = System.Drawing.Color.Transparent;
+            legend2.TitleSeparatorColor = System.Drawing.Color.Transparent;
+            this.cuadro.Legends.Add(legend2);
             this.cuadro.Location = new System.Drawing.Point(26, 118);
             this.cuadro.Name = "cuadro";
             this.cuadro.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series1.ChartArea = "ChartArea1";
-            series1.IsVisibleInLegend = false;
-            series1.LabelForeColor = System.Drawing.Color.Transparent;
-            series1.Legend = "Legend1";
-            series1.Name = "Elementos";
-            series1.YValuesPerPoint = 6;
-            this.cuadro.Series.Add(series1);
-            this.cuadro.Size = new System.Drawing.Size(775, 326);
+            series2.ChartArea = "ChartArea1";
+            series2.IsVisibleInLegend = false;
+            series2.LabelForeColor = System.Drawing.Color.Transparent;
+            series2.Legend = "Legend1";
+            series2.Name = "Elementos";
+            series2.YValuesPerPoint = 6;
+            this.cuadro.Series.Add(series2);
+            this.cuadro.Size = new System.Drawing.Size(901, 447);
             this.cuadro.TabIndex = 5;
             this.cuadro.Text = "Cuadro";
             // 
@@ -203,7 +204,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 461);
+            this.ClientSize = new System.Drawing.Size(1027, 629);
             this.Controls.Add(this.cmdVerOriginal);
             this.Controls.Add(this.cuadro);
             this.Controls.Add(this.cmdOrdenar);
@@ -214,6 +215,7 @@
             this.Name = "frmMetodos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Metodos de Ordenamiento";
+            this.Load += new System.EventHandler(this.frmMetodos_Load);
             this.gbMetodos.ResumeLayout(false);
             this.gbMetodos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLimite)).EndInit();

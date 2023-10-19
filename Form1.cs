@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Drawing.Text;
 
 namespace PRUEBA_TP_LOGICA
 {
@@ -26,7 +27,11 @@ namespace PRUEBA_TP_LOGICA
             vector = llenarVector(Convert.ToInt32(nudLimite.Value));
             graficar(vector);
         }
+        
+        private void llamarSelection()
+        {
 
+        }
 
 
         private void cmdOrdenar_Click(object sender, EventArgs e)
@@ -36,25 +41,39 @@ namespace PRUEBA_TP_LOGICA
             if (optBubbleSort.Checked)
             {
                 cuadro.Series["Elementos"].Palette = ChartColorPalette.Pastel;
-                BubbleSort(duplicado);
-                graficar(duplicado);
+                var bubble = new Task(() => { BubbleSort(duplicado);});
+                bubble.Start();
+                //BubbleSort(duplicado);
+                //graficar(duplicado);
             }
             else if (optQuickSort.Checked)
             {
                 cuadro.Series["Elementos"].Palette = ChartColorPalette.Bright;
-                QuickSort(duplicado, 0, duplicado.Length - 1);
-                graficar(duplicado);
+                var quick = new Task(() => { QuickSort(duplicado, 0, duplicado.Length - 1);});
+                quick.Start();
+
+                //QuickSort(duplicado, 0, duplicado.Length - 1);
+                //graficar(duplicado);
             }
             else if (optSelectionSort.Checked)
             {
                 cuadro.Series["Elementos"].Palette = ChartColorPalette.Berry;
-                SelectionSort(duplicado);
-                graficar(duplicado);
+                var selection = new Task(() => { SelectionSort(duplicado); });
+                selection.Start();
+                //selection = new Thread(new ThreadStart()) ;
+                //graficar(duplicado);
+            }
+            else if (optMergeSort.Checked)
+            {
+                cuadro.Series["Elementos"].Palette = ChartColorPalette.Fire;
+                var merge = new Task(() => { mergeSort(duplicado); });
+                merge.Start();
             }
         }
         private void cmdVerOriginal_Click(object sender, EventArgs e)
         {
             graficar(vector);
+            cuadro.Palette = ChartColorPalette.Bright;
         }
         
         private int[] llenarVector(int limite) 
@@ -97,22 +116,45 @@ namespace PRUEBA_TP_LOGICA
         }
         private void BubbleSort(int[] data) 
         {
+            Series serie = new Series();
+
             for (int i = 0; i < data.Length; i++)
             {
                 for (int j = 0; j < data.Length - i - 1; j++)
                 {
-                    if (data[j] > data[j+1])
+                    if (cuadro.InvokeRequired)
                     {
-                        int auxNum = data[j];
-                        data[j] = data[j+1];
-                        data[j+1] = auxNum;
-                    }        
+                        cuadro.Invoke(new MethodInvoker(delegate
+                        {
+                            if (data[j] > data[j+1])
+                            {
+                                int auxNum = data[j];
+                                data[j] = data[j+1];
+                                cuadro.Series["Elementos"].Points[j] = serie.Points.Add(data[j+1]);
+                                data[j+1] = auxNum;
+                                cuadro.Series["Elementos"].Points[j+1] = serie.Points.Add(auxNum);
+                            }
+
+                        }));
+                    }
+                    else
+                    {
+                        if (data[j] > data[j + 1])
+                        {
+                            int auxNum = data[j];
+                            data[j] = data[j + 1];
+                            cuadro.Series["Elementos"].Points[j] = serie.Points.Add(data[j + 1]);
+                            data[j + 1] = auxNum;
+                            cuadro.Series["Elementos"].Points[j + 1] = serie.Points.Add(auxNum);
+                        }
+                    }
                 }          
             }
         }
 
         public void SelectionSort(int[] data) 
         {
+            Series serie = new Series();
             int posicion; // posición del menor valor
             int menor; // menor valor para las comparaciones
                        // con i controlamos la cantidad de repeticiones del proceso
@@ -131,9 +173,29 @@ namespace PRUEBA_TP_LOGICA
                     }
                 }
                 // intercambiar el elemento menor con el de la posición i
-                int aux = data[i]; // se usa una variable auxiliar
-                data[i] = data[posicion];
-                data[posicion] = aux;
+
+                if (cuadro.InvokeRequired)
+                {
+                    cuadro.Invoke(new MethodInvoker(delegate
+                    {
+                        
+                        int aux = data[i]; // se usa una variable auxiliar
+                        data[i] = data[posicion];
+                        cuadro.Series["Elementos"].Points[i] = serie.Points.Add(data[posicion]);
+                        data[posicion] = aux;
+                        cuadro.Series["Elementos"].Points[posicion] = serie.Points.Add(aux);
+                        Thread.Sleep(50);
+                    }));
+                }
+                else
+                {
+                    int aux = data[i]; // se usa una variable auxiliar
+                    data[i] = data[posicion];
+                    cuadro.Series["Elementos"].Points[i] = serie.Points.Add(data[posicion]);
+                    data[posicion] = aux;
+                    cuadro.Series["Elementos"].Points[posicion] = serie.Points.Add(aux);
+                    Thread.Sleep(50);
+                }
             }
         }
 
@@ -150,23 +212,211 @@ namespace PRUEBA_TP_LOGICA
 
         private int Partition(int[] data, int low, int high) 
         {
+            Series serie = new Series();
             int pivot = data[high];
             int i = low - 1;
 
             for (int j = low; j < high; j++)
             {
-                if (data[j] <= pivot)
+                if (cuadro.InvokeRequired)
+                {
+                    cuadro.Invoke(new MethodInvoker(delegate
+                    {
+
+                        if (data[j] <= pivot)
+                        {
+                            i++;
+                            int auxUno = data[i];
+                            data[i] = data[j];
+                            cuadro.Series["Elementos"].Points[i] = serie.Points.Add(data[j]);
+                            data[j] = auxUno;
+                            cuadro.Series["Elementos"].Points[j] = serie.Points.Add(auxUno);
+                            Thread.Sleep(1);
+
+                        }
+
+                    }));
+                }
+                else
                 {
                     i++;
                     int auxUno = data[i];
                     data[i] = data[j];
+                    cuadro.Series["Elementos"].Points[i] = serie.Points.Add(data[j]);
                     data[j] = auxUno;
+                    cuadro.Series["Elementos"].Points[j] = serie.Points.Add(auxUno);
+                    Thread.Sleep(1);
+
                 }
             }
-            int auxDos = data[i+1];
-            data[i + 1] = data[high];
-            data[high] = auxDos;
+            if (cuadro.InvokeRequired)
+            {
+                cuadro.Invoke(new MethodInvoker(delegate
+                {
+
+                    int auxDos = data[i+1];
+                    data[i + 1] = data[high];
+                    cuadro.Series["Elementos"].Points[i + 1] = serie.Points.Add(data[high]);
+
+                    data[high] = auxDos;
+                    cuadro.Series["Elementos"].Points[high] = serie.Points.Add(auxDos);
+                    Thread.Sleep(1);
+
+
+                }));
+            }
+            else
+            {
+                int auxDos = data[i + 1];
+                data[i + 1] = data[high];
+                cuadro.Series["Elementos"].Points[data[i + 1]] = serie.Points.Add(data[high]);
+
+                data[high] = auxDos;
+                cuadro.Series["Elementos"].Points[data[high]] = serie.Points.Add(auxDos);
+                Thread.Sleep(1);
+
+            }
             return i + 1;
+
+        }
+
+        private void mergeSort(int[] array)
+        {
+            //Thread.Sleep(2000);
+
+            int length = array.Length;
+            if (length <= 1) return; //base case
+
+            int middle = length / 2;
+            int[] leftArray = new int[middle];
+            int[] rightArray = new int[length - middle];
+
+            int i = 0; //left array
+            int j = 0; //right array
+
+            for (; i < length; i++)
+            {
+                if (i < middle)
+                {
+                    leftArray[i] = array[i];
+                }
+                else
+                {
+                    rightArray[j] = array[i];
+                    j++;
+                }
+            }
+            mergeSort(leftArray);
+            mergeSort(rightArray);
+            merge(leftArray, rightArray, array);
+        }
+
+        private void merge(int[] leftArray, int[] rightArray, int[] array)
+        {
+            Series serie1 = new Series();
+
+            int leftSize = array.Length / 2;
+            int rightSize = array.Length - leftSize;
+            int i = 0, l = 0, r = 0; //indices
+
+            //check the conditions for merging
+            while (l < leftSize && r < rightSize)
+            {
+                if (cuadro.InvokeRequired)
+                {
+                    cuadro.Invoke(new MethodInvoker(delegate
+                    {
+                        if (leftArray[l] < rightArray[r])
+                        {
+                            array[i] = leftArray[l];
+                            cuadro.Series["Elementos"].Points[i] = serie1.Points.Add(leftArray[l]);
+                            i++;
+                            l++;
+                            Thread.Sleep(1);
+                        }
+                        else
+                        {
+                            array[i] = rightArray[r];
+                            cuadro.Series["Elementos"].Points[i] = serie1.Points.Add(rightArray[r]);
+                            i++;
+                            r++;
+                            Thread.Sleep(1);
+                        }
+                        }));
+                }
+                else
+                {
+                    if (leftArray[l] < rightArray[r])
+                    {
+                        array[i] = leftArray[l];
+                        cuadro.Series["Elementos"].Points[i] = serie1.Points.Add(leftArray[l]);
+                        i++;
+                        l++;
+                        Thread.Sleep(1);
+                    }
+                    else
+                    {
+                        array[i] = rightArray[r];
+                        cuadro.Series["Elementos"].Points[i] = serie1.Points.Add(rightArray[r]);
+                        i++;
+                        r++;    
+                        Thread.Sleep(1);
+                    }
+                }
+            }
+            while (l < leftSize)
+            {
+                if (cuadro.InvokeRequired)
+                {
+                    cuadro.Invoke(new MethodInvoker(delegate
+                    {
+                        array[i] = leftArray[l];
+                        cuadro.Series["Elementos"].Points[i] = serie1.Points.Add(leftArray[l]);
+                        i++;
+                        l++;
+                        Thread.Sleep(1);
+                    }));
+                }
+                else
+                {
+                    array[i] = leftArray[l];
+                    cuadro.Series["Elementos"].Points[i] = serie1.Points.Add(leftArray[l]);
+                    i++;
+                    l++;
+                    Thread.Sleep(1);
+                }
+            }
+            while (r < rightSize)
+            {
+                if (cuadro.InvokeRequired)
+                {
+                    cuadro.Invoke(new MethodInvoker(delegate
+                    {
+                        array[i] = rightArray[r];
+                        cuadro.Series["Elementos"].Points[i] = serie1.Points.Add(rightArray[r]);
+                        i++;
+                        r++;
+                        Thread.Sleep(1);
+                    }));
+                }
+                else
+                {
+                    array[i] = rightArray[r];
+                    cuadro.Series["Elementos"].Points[i] = serie1.Points.Add(rightArray[r]);
+                    i++;
+                    r++;
+                    Thread.Sleep(1);
+                }
+            }
+        }
+
+        private void frmMetodos_Load(object sender, EventArgs e)
+        {
+            this.MaximumSize = SystemInformation.PrimaryMonitorMaximizedWindowSize;
+            this.WindowState = FormWindowState.Maximized;
+            
+            //frmMetodos.m
         }
     }
 }
+
