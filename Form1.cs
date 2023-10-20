@@ -28,12 +28,6 @@ namespace PRUEBA_TP_LOGICA
             graficar(vector);
         }
         
-        private void llamarSelection()
-        {
-
-        }
-
-
         private void cmdOrdenar_Click(object sender, EventArgs e)
         {
             int[] duplicado = new int[vector.Length];
@@ -410,12 +404,12 @@ namespace PRUEBA_TP_LOGICA
             }
         }
 
+
         private void frmMetodos_Load(object sender, EventArgs e)
         {
             this.MaximumSize = SystemInformation.PrimaryMonitorMaximizedWindowSize;
             this.WindowState = FormWindowState.Maximized;
-            
-            //frmMetodos.m
+
         }
     }
 }
