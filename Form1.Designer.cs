@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.gbMetodos = new System.Windows.Forms.GroupBox();
             this.optSelectionSort = new System.Windows.Forms.RadioButton();
             this.optMergeSort = new System.Windows.Forms.RadioButton();
@@ -42,9 +42,15 @@
             this.cmdOrdenar = new System.Windows.Forms.Button();
             this.cuadro = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.cmdVerOriginal = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmdCambiar = new System.Windows.Forms.Button();
+            this.optArea = new System.Windows.Forms.RadioButton();
+            this.optPuntos = new System.Windows.Forms.RadioButton();
+            this.optColumnas = new System.Windows.Forms.RadioButton();
             this.gbMetodos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLimite)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cuadro)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbMetodos
@@ -159,33 +165,34 @@
             this.cuadro.BackColor = System.Drawing.Color.Transparent;
             this.cuadro.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.cuadro.BorderSkin.BackColor = System.Drawing.Color.Black;
-            chartArea1.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea1.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea1.AxisY.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea1.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
-            chartArea1.BackColor = System.Drawing.SystemColors.ControlLight;
-            chartArea1.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            chartArea1.Name = "ChartArea1";
-            this.cuadro.ChartAreas.Add(chartArea1);
+            chartArea2.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea2.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea2.AxisY.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea2.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.False;
+            chartArea2.BackColor = System.Drawing.SystemColors.ControlLight;
+            chartArea2.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea2.Name = "ChartArea1";
+            this.cuadro.ChartAreas.Add(chartArea2);
             this.cuadro.IsSoftShadows = false;
-            legend1.Enabled = false;
-            legend1.ForeColor = System.Drawing.Color.Transparent;
-            legend1.HeaderSeparatorColor = System.Drawing.Color.Transparent;
-            legend1.ItemColumnSeparatorColor = System.Drawing.Color.Transparent;
-            legend1.Name = "Legend1";
-            legend1.TitleForeColor = System.Drawing.Color.Transparent;
-            legend1.TitleSeparatorColor = System.Drawing.Color.Transparent;
-            this.cuadro.Legends.Add(legend1);
-            this.cuadro.Location = new System.Drawing.Point(26, 118);
+            legend2.Enabled = false;
+            legend2.ForeColor = System.Drawing.Color.Transparent;
+            legend2.HeaderSeparatorColor = System.Drawing.Color.Transparent;
+            legend2.ItemColumnSeparatorColor = System.Drawing.Color.Transparent;
+            legend2.Name = "Legend1";
+            legend2.TitleForeColor = System.Drawing.Color.Transparent;
+            legend2.TitleSeparatorColor = System.Drawing.Color.Transparent;
+            this.cuadro.Legends.Add(legend2);
+            this.cuadro.Location = new System.Drawing.Point(3, 118);
             this.cuadro.Name = "cuadro";
             this.cuadro.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series1.ChartArea = "ChartArea1";
-            series1.IsVisibleInLegend = false;
-            series1.LabelForeColor = System.Drawing.Color.Transparent;
-            series1.Legend = "Legend1";
-            series1.Name = "Elementos";
-            series1.YValuesPerPoint = 6;
-            this.cuadro.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series2.IsVisibleInLegend = false;
+            series2.LabelForeColor = System.Drawing.Color.Transparent;
+            series2.Legend = "Legend1";
+            series2.Name = "Elementos";
+            series2.YValuesPerPoint = 6;
+            this.cuadro.Series.Add(series2);
             this.cuadro.Size = new System.Drawing.Size(901, 447);
             this.cuadro.TabIndex = 5;
             this.cuadro.Text = "Cuadro";
@@ -200,11 +207,67 @@
             this.cmdVerOriginal.UseVisualStyleBackColor = true;
             this.cmdVerOriginal.Click += new System.EventHandler(this.cmdVerOriginal_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.cmdCambiar);
+            this.groupBox1.Controls.Add(this.optArea);
+            this.groupBox1.Controls.Add(this.optPuntos);
+            this.groupBox1.Controls.Add(this.optColumnas);
+            this.groupBox1.Location = new System.Drawing.Point(532, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(282, 100);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Grafico";
+            // 
+            // cmdCambiar
+            // 
+            this.cmdCambiar.Location = new System.Drawing.Point(53, 57);
+            this.cmdCambiar.Name = "cmdCambiar";
+            this.cmdCambiar.Size = new System.Drawing.Size(163, 23);
+            this.cmdCambiar.TabIndex = 7;
+            this.cmdCambiar.Text = "Cambiar";
+            this.cmdCambiar.UseVisualStyleBackColor = true;
+            this.cmdCambiar.Click += new System.EventHandler(this.cmdCambiar_Click);
+            // 
+            // optArea
+            // 
+            this.optArea.AutoSize = true;
+            this.optArea.Location = new System.Drawing.Point(190, 31);
+            this.optArea.Name = "optArea";
+            this.optArea.Size = new System.Drawing.Size(47, 17);
+            this.optArea.TabIndex = 4;
+            this.optArea.Text = "Area";
+            this.optArea.UseVisualStyleBackColor = true;
+            // 
+            // optPuntos
+            // 
+            this.optPuntos.AutoSize = true;
+            this.optPuntos.Location = new System.Drawing.Point(115, 31);
+            this.optPuntos.Name = "optPuntos";
+            this.optPuntos.Size = new System.Drawing.Size(58, 17);
+            this.optPuntos.TabIndex = 2;
+            this.optPuntos.Text = "Puntos";
+            this.optPuntos.UseVisualStyleBackColor = true;
+            // 
+            // optColumnas
+            // 
+            this.optColumnas.AutoSize = true;
+            this.optColumnas.Checked = true;
+            this.optColumnas.Location = new System.Drawing.Point(34, 31);
+            this.optColumnas.Name = "optColumnas";
+            this.optColumnas.Size = new System.Drawing.Size(71, 17);
+            this.optColumnas.TabIndex = 1;
+            this.optColumnas.TabStop = true;
+            this.optColumnas.Text = "Columnas";
+            this.optColumnas.UseVisualStyleBackColor = true;
+            // 
             // frmMetodos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1027, 629);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.cmdVerOriginal);
             this.Controls.Add(this.cuadro);
             this.Controls.Add(this.cmdOrdenar);
@@ -212,6 +275,7 @@
             this.Controls.Add(this.nudLimite);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.gbMetodos);
+            this.MaximizeBox = false;
             this.Name = "frmMetodos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Metodos de Ordenamiento";
@@ -220,6 +284,8 @@
             this.gbMetodos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLimite)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cuadro)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -238,6 +304,11 @@
         private System.Windows.Forms.Button cmdOrdenar;
         private System.Windows.Forms.DataVisualization.Charting.Chart cuadro;
         private System.Windows.Forms.Button cmdVerOriginal;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button cmdCambiar;
+        private System.Windows.Forms.RadioButton optArea;
+        private System.Windows.Forms.RadioButton optPuntos;
+        private System.Windows.Forms.RadioButton optColumnas;
     }
 }
 

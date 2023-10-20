@@ -34,7 +34,6 @@ namespace PRUEBA_TP_LOGICA
             Array.Copy(vector, duplicado, vector.Length);
             if (optBubbleSort.Checked)
             {
-                cuadro.Series["Elementos"].Palette = ChartColorPalette.Pastel;
                 var bubble = new Task(() => { BubbleSort(duplicado);});
                 bubble.Start();
                 //BubbleSort(duplicado);
@@ -42,7 +41,6 @@ namespace PRUEBA_TP_LOGICA
             }
             else if (optQuickSort.Checked)
             {
-                cuadro.Series["Elementos"].Palette = ChartColorPalette.Bright;
                 var quick = new Task(() => { QuickSort(duplicado, 0, duplicado.Length - 1);});
                 quick.Start();
 
@@ -51,7 +49,6 @@ namespace PRUEBA_TP_LOGICA
             }
             else if (optSelectionSort.Checked)
             {
-                cuadro.Series["Elementos"].Palette = ChartColorPalette.Berry;
                 var selection = new Task(() => { SelectionSort(duplicado); });
                 selection.Start();
                 //selection = new Thread(new ThreadStart()) ;
@@ -59,7 +56,6 @@ namespace PRUEBA_TP_LOGICA
             }
             else if (optMergeSort.Checked)
             {
-                cuadro.Series["Elementos"].Palette = ChartColorPalette.Fire;
                 var merge = new Task(() => { mergeSort(duplicado); });
                 merge.Start();
             }
@@ -178,7 +174,7 @@ namespace PRUEBA_TP_LOGICA
                         cuadro.Series["Elementos"].Points[i] = serie.Points.Add(data[posicion]);
                         data[posicion] = aux;
                         cuadro.Series["Elementos"].Points[posicion] = serie.Points.Add(aux);
-                        Thread.Sleep(50);
+                        Thread.Sleep(1);
                     }));
                 }
                 else
@@ -188,7 +184,7 @@ namespace PRUEBA_TP_LOGICA
                     cuadro.Series["Elementos"].Points[i] = serie.Points.Add(data[posicion]);
                     data[posicion] = aux;
                     cuadro.Series["Elementos"].Points[posicion] = serie.Points.Add(aux);
-                    Thread.Sleep(50);
+                    Thread.Sleep(1);
                 }
             }
         }
@@ -409,7 +405,23 @@ namespace PRUEBA_TP_LOGICA
         {
             this.MaximumSize = SystemInformation.PrimaryMonitorMaximizedWindowSize;
             this.WindowState = FormWindowState.Maximized;
+            cuadro.Size = new Size(1360, 580);
+        }
 
+        private void cmdCambiar_Click(object sender, EventArgs e)
+        {
+            if (optColumnas.Checked)
+            {
+                cuadro.Series["Elementos"].ChartType = SeriesChartType.Column;
+            }
+            else if (optPuntos.Checked)
+            {
+                cuadro.Series["Elementos"].ChartType = SeriesChartType.Point;
+            }
+            else if (optArea.Checked)
+            {
+                cuadro.Series["Elementos"].ChartType = SeriesChartType.Area;
+            }
         }
     }
 }
