@@ -404,7 +404,7 @@ namespace PRUEBA_TP_LOGICA
             }
         }
 
-
+     
         private void frmMetodos_Load(object sender, EventArgs e)
         {
             this.MaximumSize = SystemInformation.PrimaryMonitorMaximizedWindowSize;
